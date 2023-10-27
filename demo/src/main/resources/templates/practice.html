@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>연습문제1번</h2>
+    <div>
+        <p th:if="${age}<20" th:text="${age} + '세는 미성년자 입니다.'"></p>
+        <p th:unless="${age}<20" th:text="${age} + '세는 성인입니다.'"></p>
+    </div>
+</body>
+</html>
