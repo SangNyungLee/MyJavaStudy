@@ -15,5 +15,11 @@ public class HelloWorld {
         System.out.println(context.getBean("person"));
         System.out.println(context.getBean("person2"));
         System.out.println(context.getBean("myAddress"));
+        System.out.println(context.getBean("info"));
+        System.out.println(context.getBean(Information.class));
+        System.out.println(context.getBean("address2"));
+        System.out.println(context.getBean(Address.class));
+        System.out.println(context.getBean("info2"));
+
     }
 }
