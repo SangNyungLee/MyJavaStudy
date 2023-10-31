@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>폼 전송 실습</h2>
+    <form action="/post/practiceResult" method="post">
+        이름 : <input type="text" name="name"><br/>
+        성별 :
+        <input type="checkbox" name="gender" id="men" value="남자">남자
+        <input type="checkbox" name="gender" id="women" value="여자">여자 <br>
+        생년월일 :
+        <select name="year">
+            <option value="2023">2023</option>
+        </select>년
+        <select name="month"> <option value="10">10</option></select>월
+        <select name="day"> <option value="31">31</option></select>일<br>
+        관심사 :
+        <input type="checkbox" name="favorite" value="여행">여행
+        <input type="checkbox" name="favorite" value="패션">패션
+        <input type="checkbox" name="favorite" value="음식">음식
+        <button type="submit">회원가입</button>
+    </form>
+
+
+</body>
+</html>
