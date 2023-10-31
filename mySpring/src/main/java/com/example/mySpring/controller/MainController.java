@@ -1,12 +1,11 @@
 package com.example.mySpring.controller;
 
 import com.example.mySpring.dto.userDTO;
+import com.example.mySpring.dto.userInfo;
 import com.example.mySpring.vo.UserVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 @Controller
 // @RestController -> controller가 rest 역할을 하게 하는거 (일일히 적기 귀찮으니깐 통째로 만들어주는거임)
@@ -204,7 +203,10 @@ public class MainController {
     @PostMapping("/axios/vo/response5")
     @ResponseBody
     public String axiosVoResponse5(@RequestBody UserVO user){
+        // ModelAttribute는 setter함수를 실행해 값을 넣어주는 친구
+        // RequestBody는 setter 함수가 아닌 각각의 필드에 직접적으로 값을 주입하면서 매핑
         String msg = "이름 : " + user.getName() + ", 나이 : " + user.getAge();
         return msg;
     }
+
 }
