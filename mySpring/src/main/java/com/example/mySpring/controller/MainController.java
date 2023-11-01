@@ -208,5 +208,4 @@ public class MainController {
         String msg = "이름 : " + user.getName() + ", 나이 : " + user.getAge();
         return msg;
     }
-
 }
