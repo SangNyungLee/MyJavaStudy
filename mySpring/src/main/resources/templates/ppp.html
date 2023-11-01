@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function gogo(){
+      var form = document.getElementById("myForm");
+  axios.get("/prr",{name : form.id.value, age : form.password.value}).then((res)=>{
+  console.log(res)});
+    }
+
+</script>
+<form id="myForm">
+  <input type="text" id="id">
+  <input type="text" id="password">
+    <button onclick="gogo()">제출</button>
+</form>
+</body>
+</html>
