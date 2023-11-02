@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <form id="register_form">
+        <input type="text" name="id" id="id"/><br/>
+        <input type="text" name="pw"/><br/>
+        <input type="text" name="name"/>
+        <button type="button" onclick="register()">회원가입</button>
+    </form>
+
+<script>
+    function register(){
+        const form = document.getElementById("register_form");
+        const data = {
+            user_id : form.id.value,
+            password : form.pw.value,
+            name : form.name.value
+        }
+
+        axios({
+            method:"POST",
+            url : "/register",
+            data : data
+        }).then((res) =>{
+            alert("회원가입이 완료되었습니다.");
+        })
+
+    }
+</script>
+</body>
+</html>
