@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+<script th:inline="javascript">
+</script>
+<h2>회원가입</h2>
+<form action="/insert" method="get">
+    아이디 : <input type="text" name="name"/> 비밀번호 : <input type="text" name="password"/>
+    <button type="submit">회원가입</button>
+</form>
+
+<h2>로그인</h2>
+<form action="/find" method="get">
+    아이디 : <input type="text" name="name"/> 비밀번호 : <input type="text" name="password"/>
+    <button onclick="login()">로그인</button>
+</form>
+<p th:if="${good == 'good'}" th:text="'로그인 성공'"></p>
+<p th:unless="${good == 'good'}" th:text="'로그인 안 됨'"></p>
+<h2>정보수정</h2>
+<form action="/update" method="get">
+    아이디 : <input type="text" name="name"/> 비밀번호 : <input type="text" name="password"/>
+    <button>수정하기</button>
+</form>
+<h2>회원탈퇴</h2>
+<form action="/delete" method="get">
+    아이디 : <input type="text" /> 비밀번호 : <input type="text" />
+    <button>탈퇴하기</button>
+</form>
+</body>
+</html>
