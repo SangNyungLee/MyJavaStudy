@@ -18,7 +18,10 @@
             user_id : form.id.value,
             password : form.pw.value
         }
-        axios.post("/login",data).then((res)=>{console.log(res)});
+        axios.post("/login",data).then((res)=>{
+        console.log(res);
+        document.location.href = `/data/${res.data.id}`
+        });
     }
 </script>
 </body>

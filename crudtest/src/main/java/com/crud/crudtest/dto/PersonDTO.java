@@ -14,7 +14,7 @@ public class PersonDTO {
         this.id = id;
     }
 
-    public String getUser_id() {
+    public String getUserId() {
         return user_id;
     }
 
