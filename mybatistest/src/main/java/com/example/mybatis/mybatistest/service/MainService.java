@@ -1,6 +1,6 @@
 package com.example.mybatis.mybatistest.service;
 
-import com.example.mybatis.mybatistest.domain.User;
+import com.example.mybatis.mybatistest.domain.Users;
 import com.example.mybatis.mybatistest.dto.UserDTO;
 import com.example.mybatis.mybatistest.mapper.MainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class MainService {
     private MainMapper mainMapper;
 
     public List<UserDTO> getUserList(){
-        List<User> result = mainMapper.retrieveAll();
+        List<Users> result = mainMapper.retrieveAll();
         List<UserDTO> users = new ArrayList<>();
 
         for(int i=0; i< result.size() ; i++){
@@ -31,7 +31,7 @@ public class MainService {
         return users;
     }
 
-    public void addUser(User user){
-        mainMapper.insertUser(user);
+    public void addUser(Users users){
+        mainMapper.insertUser(users);
     }
 }

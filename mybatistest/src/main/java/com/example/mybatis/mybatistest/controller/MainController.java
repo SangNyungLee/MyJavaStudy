@@ -1,6 +1,6 @@
 package com.example.mybatis.mybatistest.controller;
 
-import com.example.mybatis.mybatistest.domain.User;
+import com.example.mybatis.mybatistest.domain.Users;
 import com.example.mybatis.mybatistest.dto.UserDTO;
 import com.example.mybatis.mybatistest.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +26,10 @@ public class MainController {
 
     @GetMapping("/user/insert")
     public String getInsertUser(@RequestParam String name, @RequestParam String address, Model model){
-        User user = new User();
-        user.setName(name);
-        user.setAddress(address);
-        mainService.addUser(user);
+        Users users = new Users();
+        users.setName(name);
+        users.setAddress(address);
+        mainService.addUser(users);
 
         model.addAttribute("list", null);
         return "user";
