@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 내 경로랑 똑같게 설정 해준다. -->
+<mapper namespace="com.mybatis.kdt9.mapper.UserMapper">
+    <select id="retrieveAll" resultType="com.mybatis.kdt9.domain.User">
+        <!-- resultType => 어떤 객체랑 매핑시켜줄지 경로 설정해주는거(연결시켜준다 라고 생각하면댐)-->
+        <!-- 누군가 UserMapper 안에 있는 retriveAll()을 실행하면 여기 안에 있는 애가 실행된다.-->
+        SELECT myuser.* FROM myuser
+    </select>
+
+    <select id="getUserList" resultType="User">
+        SELECT * FROM myuser
+        <where>
+            <if test="name != null"> <!-- 동적쿼리 -->
+                AND name = #{name}
+            </if>
+            <if test="email != null"> <!-- 동적쿼리 -->
+                AND email = #{email}
+            </if>
+        </where>
+    </select>
+</mapper>

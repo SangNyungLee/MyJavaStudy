@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function write(){
+        console.log("눌렸음");
+        const form = document.getElementById("myform");
+        const data = {
+            writer : form.writer.value,
+            title : form.title.value,
+            content : form.content.value
+        };
+        axios.post("/write",data).then((res)=>{console.log("res",res)})
+    }
+</script>
+    <h2>게시판</h2>
+    <form id="myform">
+        작성자 : <input type="text" id="writer" ><br>
+        제목 : <input type="text" id="title"><br>
+        내용 : <input type="text" id="content"><br>
+    </form>
+<button type="button" onclick="write()">제출</button>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>contents</th>
+            <th>writer</th>
+            <th>registered</th>
+        </tr>
+<!--        <tr th:each="user:${list}">-->
+<!--            <th th:text="${user.id}"></th>-->
+<!--            <th th:text="${user.title}"></th>-->
+<!--            <th th:text="${user.content}"></th>-->
+<!--            <th th:text="${user.writer}"></th>-->
+<!--            <th th:text="${user.registered}"></th>-->
+<!--        </tr>-->
+    </table>
+
+</body>
+</html>
