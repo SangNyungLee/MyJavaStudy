@@ -7,10 +7,7 @@ import com.practice.gogo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,14 +22,36 @@ public class BoardController {
     public String getBoard(Model model){
         List<Board> boards = boardService.getBoardList();
         model.addAttribute("list",boards);
-
         return "board";
     }
 
-    @PostMapping("/write")
+    @GetMapping("/findWriter")
+    public String findBoard(@RequestParam("name") String name, Model model){
+        List<Board> findBoardList = boardService.findBoardList(name);
+        model.addAttribute("list",findBoardList);
+        return "board2";
+    }
+
+    @PostMapping("/mysubmit")
     @ResponseBody
     public boolean writeBoard(@RequestBody BoardDTO boardDTO){
-        System.out.println("hi");
+        boardService.insertBoard(boardDTO);
         return true;
     }
+
+    @PostMapping("/updateContent")
+    @ResponseBody
+    public boolean updateBoard(@RequestBody BoardDTO boardDTO){
+        boardService.updateBoard(boardDTO);
+        return true;
+    }
+    @GetMapping("/deleteContent")
+    @ResponseBody
+    public boolean deleteBoard(@RequestParam("id") String id){
+        System.out.println("??????????????" + id);
+        boardService.deleteBoard(id);
+        return true;
+    }
+
+
 }

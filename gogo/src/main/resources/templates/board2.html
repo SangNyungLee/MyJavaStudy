@@ -37,46 +37,46 @@
         axios.get(`/deleteContent?id=${delId}`).then((res)=>{console.log(res);})
     }
 </script>
-    <h2>게시판</h2>
-    <form id="myform">
-        작성자 : <input type="text" id="writer" ><br>
-        제목 : <input type="text" id="title"><br>
-        내용 : <input type="text" id="content"><br>
-        <button type="button" onclick="mysubmit()">제출</button>
-    </form>
-    <br>
-    작성자 조회 : <input type="text" id="selectWriter"><br>
-    <button type="button" onclick="findWriter()">찾기</button><br>
+<h2>게시판</h2>
+<form id="myform">
+    작성자 : <input type="text" id="writer" ><br>
+    제목 : <input type="text" id="title"><br>
+    내용 : <input type="text" id="content"><br>
+    <button type="button" onclick="mysubmit()">제출</button>
+</form>
+<br>
+작성자 조회 : <input type="text" id="selectWriter"><br>
+<button type="button" onclick="findWriter()">찾기</button><br>
 
-    <form id="updateForm">
-        번호 : <input type="text" id="updateId"><br>
-        작성자 : <input type="text" id="updateWriter" ><br>
-        제목 : <input type="text" id="updateTitle"><br>
-        내용 : <input type="text" id="updateContent"><br>
-        <button type="button" onclick="myUpdate()">제출</button>
-    </form>
+<form id="updateForm">
+    번호 : <input type="text" id="updateId"><br>
+    작성자 : <input type="text" id="updateWriter" ><br>
+    제목 : <input type="text" id="updateTitle"><br>
+    내용 : <input type="text" id="updateContent"><br>
+    <button type="button" onclick="myUpdate()">제출</button>
+</form>
 <br>
 삭제할 아이디 : <input type="text" id="deleteId"><br>
 <button type="button" onclick="deleteContent()">삭제하기</button>
 
 
 
-    <table>
-        <tr>
-            <th>id</th>
-            <th>title</th>
-            <th>contents</th>
-            <th>writer</th>
-            <th>registered</th>
-        </tr>
-        <tr th:each="user:${list}">
-            <th th:text="${user.id}"></th>
-            <th th:text="${user.title}"></th>
-            <th th:text="${user.content}"></th>
-            <th th:text="${user.writer}"></th>
-            <th th:text="${user.registered}"></th>
-        </tr>
-    </table>
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>contents</th>
+        <th>writer</th>
+        <th>registered</th>
+    </tr>
+    <tr th:each="user:${list}">
+        <th th:text="${user.id}"></th>
+        <th th:text="${user.title}"></th>
+        <th th:text="${user.content}"></th>
+        <th th:text="${user.writer}"></th>
+        <th th:text="${user.registered}"></th>
+    </tr>
+</table>
 
 </body>
 </html>
