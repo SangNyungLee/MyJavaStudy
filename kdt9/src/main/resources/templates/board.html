@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>게시판</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function searchBoard() {
+            var form = document.getElementById('form_search');
+            axios.get(`/board/search?word=${form.word.value}`).then((res) => {
+                alert('일치하는 제목의 게시글은 ' + res.data + '개 입니다.');
+            });
+        }
+
+        function writeBoard() {
+            var form = document.getElementById('form_board');
+            var data = {
+                title: form.title.value,
+                content: form.content.value,
+                writer: form.writer.value,
+            };
+
+            axios.post(`/board`, data).then((res) => {
+                location.reload();
+            });
+        }
+        function editBoard(id) {
+            var form = document.getElementById('form_board');
+            var data = {
+                id,
+                title: form.title.value,
+                content: form.content.value,
+                writer: form.writer.value,
+            };
+            axios.patch(`/board`, data).then((res) => {
+                location.reload();
+            });
+        }
+        function deleteBoard(id) {
+            axios.delete(`/board?id=${id}`).then((res) => {
+                location.reload();
+            });
+        }
+    </script>
+</head>
+<body>
+<h5>이거슨 게시판</h5>
+<form id="form_search">
+    <input type="text" name="word" placeholder="검색어" /><button type="button" onclick="searchBoard()">
+    검색
+</button>
+</form>
+<form id="form_board">
+    <input type="text" name="title" placeholder="제목" />
+    <input type="text" name="content" placeholder="내용" />
+    <input type="text" name="writer" placeholder="작성자" /><button type="button" onclick="writeBoard()">
+    작성
+</button>
+</form>
+<table border="1">
+    <tr>
+        <th>No.</th>
+        <th>ID</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>수정</th>
+        <th>삭제</th>
+    </tr>
+    <tr th:each="board: ${list}">
+        <td th:text="${board.getNo()}"></td>
+        <td th:text="${board.getId()}"></td>
+        <td th:text="${board.getTitle()}"></td>
+        <td th:text="${board.getWriter()}"></td>
+        <td th:text="${board.getRegistered()}"></td>
+        <td>
+            <button type="button" th:onclick="editBoard([[${board.getId()}]])">수정</button>
+        </td>
+        <td>
+            <button type="button" th:onclick="deleteBoard([[${board.getId()}]])">삭제</button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
