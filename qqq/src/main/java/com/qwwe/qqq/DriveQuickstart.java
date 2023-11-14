@@ -7,6 +7,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.AbstractInputStreamContent;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -86,8 +87,15 @@ public class DriveQuickstart {
 ////        java.io.File f = new java.io.File("C:\\Users\\SangNyung\\Desktop\\ee\\uploadtest.txt");
 //        java.io.File f = new java.io.File("C:\\Users\\SANGYOUNG\\Desktop\\ee\\uploadtest.txt");
 //        FileContent fileContent = new FileContent("text/plain", f);
-//
-//        service.files().create(fileMetaData, fileContent).setFields("id").execute();
+//        service.files().create(fileMetaData, fileContent).execute();
+
+//        //파일 덮어씌우기
+//        System.out.println("파일 덮어씌우기");
+//        File fileMetaData2 = new File();
+//        fileMetaData2.setName("uploadtest.txt");
+//        java.io.File f2 = new java.io.File("C:\\Users\\SANGYOUNG\\Desktop\\ee\\uploadtest2.txt");
+//        FileContent fileContent1 = new FileContent("text/plain", f2);
+//        service.files().update(realFileId, fileMetaData2, fileContent1).execute();
 
 //        //파일 다운로드
 //        String downFileName = "test.txt";
@@ -114,13 +122,16 @@ public class DriveQuickstart {
 //        }
 
         //구글 드라이브에 있는 파일 삭제하는 방법
-        try{
-            service.files().delete(realFileId).execute();
-            System.out.println("성공적으로 삭제했습니다.");
-        }catch (IOException e){
-            e.printStackTrace();
-            System.out.println("삭제 실패");
-        }
+//        try{
+//            service.files().delete(realFileId).execute();
+//            System.out.println("성공적으로 삭제했습니다.");
+//        }catch (IOException e){
+//            e.printStackTrace();
+//            System.out.println("삭제 실패");
+//        }
+
+        //휴지통비우기
+//        service.files().emptyTrash().execute();
 
     }
 }
