@@ -19,26 +19,35 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Scanner;
 /* class to demonstrate use of Drive files list API */
 public class DriveQuickstart {
     private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+    //사용자의 토큰을 어디에 저정할지 경로를 지정
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
+
+    //어플리케이션이 요청하는 권한의 범위를 지정하는 것
     private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE);
+
+    //비밀키 경로
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+    //사용자의 자격증명(credential)을 가져오는 메서드
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
             throws IOException {
+        //credentials.json 파일을 in에 저장함
         InputStream in = DriveQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
-        if (in == null) {
+        if (in == null) {   // credentials이 빈값이면
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }
-        GoogleClientSecrets clientSecrets =
-                GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
                 .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
@@ -50,7 +59,7 @@ public class DriveQuickstart {
     }
 
     public static void main(String... args) throws IOException, GeneralSecurityException {
-        String realFileId = "";
+            String realFileId = "";
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
@@ -66,13 +75,13 @@ public class DriveQuickstart {
         } else {
             System.out.println("Files:");
             for (File file : files) {
-                if(file.getName().equals("uploadtest.txt")){
-                    System.out.println("uploadtest 파일 찾음");
+                if(file.getName().equals("test.txt")){
+                    System.out.println("test 파일 찾음");
                     realFileId = file.getId();
                     System.out.println(file.getId());
                     InputStream contentStream = service.files().get(file.getId()).executeMediaAsInputStream();
-                    java.util.Scanner s = new java.util.Scanner(contentStream).useDelimiter("\\A");
-                    String fileContent = s.hasNext() ? s.next() : "";
+                    Scanner scanner = new Scanner(contentStream).useDelimiter("\\A");
+                    String fileContent = scanner.hasNext() ? scanner.next() : "";
                     System.out.println("File Name: " + file.getName());
                     System.out.println("File Content : " + fileContent);
                 }else{
@@ -81,13 +90,16 @@ public class DriveQuickstart {
             }
         }
         //파일 업로드
-//        System.out.println("\n\n 파일 업로드 시작..");
-//        File fileMetaData = new File();
-//        fileMetaData.setName("uploadtest.txt"); //업로드 파일 이름
-////        java.io.File f = new java.io.File("C:\\Users\\SangNyung\\Desktop\\ee\\uploadtest.txt");
+        System.out.println("\n\n 파일 업로드 시작..");
+        Path currentWorkingDir = Paths.get("").toAbsolutePath();
+        System.out.println("Current Working Directory : " + currentWorkingDir);
+        File fileMetaData = new File();
+        fileMetaData.setName("uploadtest.txt"); //업로드 파일 이름
+//        java.io.File f = new java.io.File("C:\\Users\\SangNyung\\Desktop\\ee\\uploadtest.txt");
 //        java.io.File f = new java.io.File("C:\\Users\\SANGYOUNG\\Desktop\\ee\\uploadtest.txt");
-//        FileContent fileContent = new FileContent("text/plain", f);
-//        service.files().create(fileMetaData, fileContent).execute();
+        java.io.File f = new java.io.File(currentWorkingDir + "/src/main/java/files/photo.jpg");
+        FileContent fileContent = new FileContent("image/jpeg", f);
+        service.files().create(fileMetaData, fileContent).execute();
 
 //        //파일 덮어씌우기
 //        System.out.println("파일 덮어씌우기");
