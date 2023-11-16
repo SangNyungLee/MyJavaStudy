@@ -35,6 +35,7 @@ public class DriveQuickstart {
     //비밀키 경로
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
+    //realFileId를 어떻게 넣을지 고민좀 해보기
     private static String realFileId = "";
 
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException{
@@ -73,8 +74,11 @@ public class DriveQuickstart {
                     System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
         }
+        //파일 업로드
 //        uploadFile(service);
-//        fileDownload(service);
+        //파일 다운로드
+        fileDownload(service);
+        //파일 삭제
 //        DeleteFile(service);
     }
 
